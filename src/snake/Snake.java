@@ -68,7 +68,7 @@ public class Snake {
   private boolean collide(Cell next) {
     return next.getRow() < 0 || next.getRow() > Conf.ROW - 1
         || next.getCol() < 0 || next.getCol() > Conf.COL - 1
-        || body.stream().anyMatch(sb -> sb.equals(next));
+        || body.stream().anyMatch(next::equals);
   }
 
 }

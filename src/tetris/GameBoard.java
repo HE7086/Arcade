@@ -156,7 +156,7 @@ public class GameBoard extends JPanel {
   }
 
   private boolean isGameOver() {
-    return IntStream.range(0, Conf.COL).anyMatch(col -> wall[0][col] != null);
+    return Arrays.stream(wall[0]).anyMatch(Objects::nonNull);
   }
 
 /*--------------------------------------------------------------------------------------------------------------------*/
