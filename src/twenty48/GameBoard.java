@@ -21,11 +21,21 @@ public class GameBoard extends JPanel {
       @Override
       public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-          case KeyEvent.VK_UP -> moveUp();
-          case KeyEvent.VK_DOWN -> moveDown();
-          case KeyEvent.VK_LEFT -> moveLeft();
-          case KeyEvent.VK_RIGHT -> moveRight();
-          case KeyEvent.VK_R -> restart();
+          case KeyEvent.VK_UP:
+            moveUp();
+            break;
+          case KeyEvent.VK_DOWN:
+            moveDown();
+            break;
+          case KeyEvent.VK_LEFT:
+            moveLeft();
+            break;
+          case KeyEvent.VK_RIGHT:
+            moveRight();
+            break;
+          case KeyEvent.VK_R:
+            restart();
+            break;
         }
         if (moved && !isGameOver()) set(next());
         repaint();

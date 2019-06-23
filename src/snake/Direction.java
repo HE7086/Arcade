@@ -7,12 +7,18 @@ public enum Direction {
   public final int col;
 
   public boolean notRevert(Direction d) {
-    return switch (this) {
-      case UP -> d != DOWN;
-      case DOWN -> d != UP;
-      case LEFT -> d != RIGHT;
-      case RIGHT -> d != LEFT;
-    };
+    switch (this) {
+      case UP:
+        return d != DOWN;
+      case DOWN:
+        return d != UP;
+      case LEFT:
+        return d != RIGHT;
+      case RIGHT:
+        return d != LEFT;
+      default:
+        return false;
+    }
   }
 
   Direction(int row, int col) {

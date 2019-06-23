@@ -32,15 +32,27 @@ public class Conf {
 //  public static final Color C2048
 
   public static Color getColor(Cell cell) {
-    return switch (cell.getValue()) {
-      case 2 -> C2;
-      case 4 -> C4;
-      case 8 -> C8;
-      case 16 -> C16;
-      case 32 -> C32;
-      case 64 -> C64;
-      case 128, 256, 512, 1024, 2048 -> C128;
-      default -> COther;
-    };
+    switch (cell.getValue()) {
+      case 2:
+        return C2;
+      case 4:
+        return C4;
+      case 8:
+        return C8;
+      case 16:
+        return C16;
+      case 32:
+        return C32;
+      case 64:
+        return C64;
+      case 128:
+      case 256:
+      case 512:
+      case 1024:
+      case 2048:
+        return C128;
+      default:
+        return COther;
+    }
   }
 }

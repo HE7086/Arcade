@@ -29,18 +29,42 @@ public class GameBoard extends JPanel {
       @Override
       public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-          case KeyEvent.VK_RIGHT -> moveRight();
-          case KeyEvent.VK_LEFT -> moveLeft();
-          case KeyEvent.VK_DOWN -> moveDown();
-          case KeyEvent.VK_UP -> moveBottom();
-          case KeyEvent.VK_A -> spinCell(tetris.spin(true));
-          case KeyEvent.VK_D -> spinCell(tetris.spin(false));
-          case KeyEvent.VK_R -> restart();
-          case KeyEvent.VK_P -> isRunning = false;
-          case KeyEvent.VK_C -> isRunning = true;
-          case KeyEvent.VK_ESCAPE -> System.exit(0);
-          case KeyEvent.VK_EQUALS -> level++;
-          case KeyEvent.VK_MINUS -> level--;
+          case KeyEvent.VK_RIGHT:
+            moveRight();
+            break;
+          case KeyEvent.VK_LEFT:
+            moveLeft();
+            break;
+          case KeyEvent.VK_DOWN:
+            moveDown();
+            break;
+          case KeyEvent.VK_UP:
+            moveBottom();
+            break;
+          case KeyEvent.VK_A:
+            spinCell(tetris.spin(true));
+            break;
+          case KeyEvent.VK_D:
+            spinCell(tetris.spin(false));
+            break;
+          case KeyEvent.VK_R:
+            restart();
+            break;
+          case KeyEvent.VK_P:
+            isRunning = false;
+            break;
+          case KeyEvent.VK_C:
+            isRunning = true;
+            break;
+          case KeyEvent.VK_ESCAPE:
+            System.exit(0);
+            break;
+          case KeyEvent.VK_EQUALS:
+            level++;
+            break;
+          case KeyEvent.VK_MINUS:
+            level--;
+            break;
         }
         repaint();
       }
@@ -117,13 +141,16 @@ public class GameBoard extends JPanel {
         }
       }
     }
-    score += switch (count) {
-      case 1 -> Conf.SCORE_1 * level;
-      case 2 -> Conf.SCORE_2 * level;
-      case 3 -> Conf.SCORE_3 * level;
-      case 4 -> Conf.SCORE_4 * level;
-      default -> 0;
-    };
+    switch (count) {
+      case 1:
+        score += Conf.SCORE_1 * level;
+      case 2:
+        score += Conf.SCORE_2 * level;
+      case 3:
+        score += Conf.SCORE_3 * level;
+      case 4:
+        score += Conf.SCORE_4 * level;
+    }
   }
 
   private boolean notBottom() {

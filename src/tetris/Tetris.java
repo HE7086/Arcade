@@ -20,16 +20,24 @@ public class Tetris {
   }
 
   public static Tetris next() {
-    return switch (random.nextInt(7)) {
-      case 0 -> new J();
-      case 1 -> new L();
-      case 2 -> new O();
-      case 3 -> new Z();
-      case 4 -> new S();
-      case 5 -> new I();
-      case 6 -> new T();
-      default -> null;
-    };
+    switch (random.nextInt(7)) {
+      case 0:
+        return new J();
+      case 1:
+        return new L();
+      case 2:
+        return new O();
+      case 3:
+        return new Z();
+      case 4:
+        return new S();
+      case 5:
+        return new I();
+      case 6:
+        return new T();
+      default:
+        return null;
+    }
   }
 
   public Cell[] spin(boolean clockwise) {

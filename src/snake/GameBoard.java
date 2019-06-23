@@ -19,13 +19,20 @@ public class GameBoard extends JPanel {
     this.addKeyListener(new KeyAdapter() {
       @Override
       public void keyPressed(KeyEvent e) {
-        snake.setHead(switch (e.getKeyCode()) {
-          case KeyEvent.VK_UP -> Direction.UP;
-          case KeyEvent.VK_DOWN -> Direction.DOWN;
-          case KeyEvent.VK_LEFT -> Direction.LEFT;
-          case KeyEvent.VK_RIGHT -> Direction.RIGHT;
-          default -> snake.getHead();
-        });
+        switch (e.getKeyCode()) {
+          case KeyEvent.VK_UP:
+            snake.setHead(Direction.UP);
+            break;
+          case KeyEvent.VK_DOWN:
+            snake.setHead(Direction.DOWN);
+            break;
+          case KeyEvent.VK_LEFT:
+            snake.setHead(Direction.LEFT);
+            break;
+          case KeyEvent.VK_RIGHT:
+            snake.setHead(Direction.RIGHT);
+            break;
+        }
         repaint();
       }
     });
@@ -43,7 +50,7 @@ public class GameBoard extends JPanel {
     }, 100, Conf.INTERVAL);
   }
 
-/*--------------------------------------------------------------------------------------------------------------------*/
+  /*--------------------------------------------------------------------------------------------------------------------*/
 
   @Override
   public void paint(Graphics g) {
