@@ -4,10 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
 import java.util.Timer;
-import java.util.TimerTask;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import javax.swing.*;
 
@@ -159,7 +158,7 @@ public class GameBoard extends JPanel {
     return Arrays.stream(wall[0]).anyMatch(Objects::nonNull);
   }
 
-/*--------------------------------------------------------------------------------------------------------------------*/
+  /*--------------------------------------------------------------------------------------------------------------------*/
 
   @Override
   public void paint(Graphics g) {
@@ -177,10 +176,11 @@ public class GameBoard extends JPanel {
         Cell cell = wall[row][col];
         int rows = row * Conf.CELL_SIZE;
         int cols = col * Conf.CELL_SIZE;
-        g.clearRect(cols, rows, Conf.CELL_EDGE, Conf.CELL_EDGE);
         if (cell != null) {
           g.setColor(cell.getColor());
           g.fillRect(cols, rows, Conf.CELL_EDGE, Conf.CELL_EDGE);
+        } else {
+          g.clearRect(cols, rows, Conf.CELL_EDGE, Conf.CELL_EDGE);
         }
       }
     }

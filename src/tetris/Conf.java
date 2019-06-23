@@ -9,7 +9,7 @@ public class Conf {
   public static final int CELL_EDGE = 25;
 
   public static final int FRAME_WIDTH = 525;
-  public static final int FRAME_HIGHT = 600;
+  public static final int FRAME_HEIGHT = 600;
   public static final int FRAME_EDGE = 10;
   public static final int FRAME_COLUM = 20;
 

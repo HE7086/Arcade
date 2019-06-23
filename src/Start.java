@@ -8,26 +8,16 @@ public class Start {
   public static void main(String[] args) {
     start.setLayout(new GridLayout());
     start.setTitle("The Arcade Project v0.1");
-    JButton runSnake = new JButton("Snake");
     JLabel label = new JLabel("Choose One To Play!", JLabel.CENTER);
+    JButton runSnake = new JButton("Snake");
     JButton runTetris = new JButton("Tetris");
-    start.add(runSnake);
+    JButton run2048 = new JButton("2048");
     start.add(label);
+    start.add(runSnake);
     start.add(runTetris);
+    start.add(run2048);
     start.setLocationRelativeTo(null);
     start.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    start.addKeyListener(new KeyAdapter() {
-      @Override
-      public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-          System.exit(0);
-        }
-      }
-    });
-    start.pack();
-    start.setVisible(true);
-
-
     runSnake.addActionListener(e -> {
       JPanel panel = new snake.GameBoard();
       JFrame frame = new JFrame();
@@ -40,10 +30,28 @@ public class Start {
       JPanel panel = new tetris.GameBoard();
       JFrame frame = new JFrame();
       frame.setTitle("The Tetris");
-      frame.setSize(tetris.Conf.FRAME_WIDTH, tetris.Conf.FRAME_HIGHT);
+      frame.setSize(tetris.Conf.FRAME_WIDTH, tetris.Conf.FRAME_HEIGHT);
       frame.add(panel);
       play(frame);
     });
+    run2048.addActionListener(e -> {
+      JPanel panel = new twenty48.GameBoard();
+      JFrame frame = new JFrame();
+      frame.setTitle("2048");
+      frame.setSize(twenty48.Conf.FRAME_WIDTH, twenty48.Conf.FRAME_HEIGHT);
+      frame.add(panel);
+      play(frame);
+    });
+    start.addKeyListener(new KeyAdapter() {
+      @Override
+      public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+          System.exit(0);
+        }
+      }
+    });
+    start.pack();
+    start.setVisible(true);
   }
 
   private static void play(JFrame frame) {
