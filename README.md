@@ -2,7 +2,7 @@
 
 Just a boring man who does some boring things
 
-features snake and tetris
+features snake, tetris and 2048
 
 Compiled with jdk12 preview feature
 
