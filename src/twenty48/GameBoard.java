@@ -6,10 +6,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.Random;
 
 public class GameBoard extends JPanel {
-  private static final Random random = new Random();
   private Cell[][] cells;
   private int score;
   private boolean moved = false;
@@ -27,7 +25,7 @@ public class GameBoard extends JPanel {
           case KeyEvent.VK_RIGHT -> moveRight();
           case KeyEvent.VK_R -> restart();
         }
-        if (moved && !isGameOver()) set(next());
+        if (moved) set(next());
         repaint();
       }
     });
@@ -43,27 +41,15 @@ public class GameBoard extends JPanel {
   }
 
   public boolean isGameOver() {
-    if (Arrays.stream(cells).flatMap(Arrays::stream).allMatch(Objects::nonNull)) {
-      boolean cannotMerge = true;
-      for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 3; j++) {
-          if (cells[i][j].getValue() == cells[i][j + 1].getValue()) {
-            cannotMerge = false;
-            break;
-          }
+    if (Arrays.stream(cells).flatMap(Arrays::stream).anyMatch(Objects::isNull)) return false;
+    for (int i = 0; i < 4; i++) {
+      for (int j = 0; j < 3; j++) {
+        if (cells[i][j].valueEquals(cells[i][j + 1]) || cells[j][i].valueEquals(cells[j + 1][i])) {
+          return false;
         }
       }
-      for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 4; j++) {
-          if (cells[i][j].getValue() == cells[i + 1][j].getValue()) {
-            cannotMerge = false;
-            break;
-          }
-        }
-      }
-      return cannotMerge;
     }
-    return false;
+    return true;
   }
 
   public void moveUp() {
@@ -111,7 +97,7 @@ public class GameBoard extends JPanel {
 
   private void merge(int row, int col, Direction d) {
     if (canMerge(cells[row][col], d)) {
-      score += cells[row + d.row][col + d.col].mergeValue();
+      score += cells[row + d.row][col + d.col].upgrade();
       cells[row][col] = null;
       moved = true;
     }
@@ -128,8 +114,7 @@ public class GameBoard extends JPanel {
     if (cell == null) return false;
     int row = cell.getRow() + d.row;
     int col = cell.getCol() + d.col;
-    if (row < 0 || row > 3 || col < 0 || col > 3) return false;
-    return cells[row][col].getValue() == cell.getValue();
+    return row >= 0 && row <= 3 && col >= 0 && col <= 3 && cells[row][col].valueEquals(cell);
   }
 
   private Cell next() {

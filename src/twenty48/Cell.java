@@ -41,8 +41,12 @@ public class Cell {
     return value;
   }
 
-  public int mergeValue() {
+  public int upgrade() {
     return this.value <<= 1;
+  }
+
+  public boolean valueEquals(Cell cell) {
+    return this.value == cell.value;
   }
 
   public static Cell next() {
